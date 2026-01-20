@@ -49,7 +49,7 @@
                                     &kp LCTRL         &kp LALT          &mo SYM           &kp Q             &kp SPACE         &kp ENTER         &kp MINUS         &mo NAV          &kp RALT          &kp LSHIFT
             >;
             /* Encoder: Links = Lautstärke, Rechts = Scrollen */
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp PG_UP PG_DN>;
         };
 
         /* LAYER 1: BONE CAP (Deutsch)
