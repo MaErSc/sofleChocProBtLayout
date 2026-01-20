@@ -12,19 +12,10 @@
 
 /* Layer-Definitionen */
 #define BASE 0
-#define SYM  1
-#define NAV  2
-#define FUN  3
-
-/* Macro für deutsche Sonderzeichen (optional, falls AltGr nötig) */
-#define DE_BSLS RA(MINUS)  // Backslash auf DE Layout (AltGr + ß)
-#define DE_PIPE RA(NUBS)   // Pipe auf DE Layout (AltGr + <)
-#define DE_AT   RA(Q)      // @ auf DE Layout
-#define DE_EURO RA(E)      // € auf DE Layout
-#define DE_LCBR RA(N7)     // {
-#define DE_RCBR RA(N0)     // }
-#define DE_LBRC RA(N8)     // [
-#define DE_RBRC RA(N9)     // ]
+#define CAP  1
+#define SYM  2
+#define NAV  3
+#define FUN  4
 
 / {
 
@@ -41,68 +32,104 @@
         compatible = "zmk,keymap";
 
         /* LAYER 0: BONE BASE (Deutsch)
-         * Linke Seite (6 Spalten):               Rechte Seite (6 Spalten):
-         * ESC | 1 2 3 4 5                        6 7 8 9 0 | DEL
-         * TAB | J D U A X                        P H L M W | BackSpc
-         * LCTRL | C T I E O                      B N R S G | Ä
-         * LSHFT | F V Ü Ä Ö                      Y Z , . K | RSHIFT
-         * Daumen: GUI LALT SYM SPC Q             ß ENTER NAV RALT RCTRL
+      // ------------------------------------------------------------------------------------------------------------
+      // | ESC   |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |   DEL |
+      // | TAB   |  j  |  d  |  u   |  a   |  x   |                   |  p   |  h    |  l    |  m   |   w   | BKSPC |
+      // |RGB_BRD|  c  |  t  |  i   |  e   |  o   |                   |  b   |  n    |  r    |  s   |   g   |RGB_BRI|
+      // | CAP   |  f  |  v  |  ü   |  ä   |  ö   |  MUTE  |  | PLAY  |  y   |  z    |  ,    |  .   |   k   |   CAP |
+      //               | CTRL| ALT  | SYM  |  q   |  SPACE |  | ENTER |  ß   | NAV   | ALT   |LSHIFT|
          */
         default_layer {
             display-name = "BONE";
             bindings = <
 &kp ESC           &kp N1            &kp N2            &kp N3            &kp N4            &kp N5                                                &kp N6            &kp N7            &kp N8            &kp N9            &kp N0            &kp DEL
 &kp TAB           &kp J             &kp D             &kp U             &kp A             &kp X                                                 &kp P             &kp H             &kp L             &kp M             &kp W             &kp BSPC
-&kp LCTRL         &kp C             &kp T             &kp I             &kp E             &kp O                                                 &kp B             &kp N             &kp R             &kp S             &kp G             &kp SQT
-&kp LSHFT         &kp F             &kp V             &kp LBKT          &kp SQT           &kp SEMI          &kp C_MUTE        &kp C_PP          &kp Z             &kp Y             &kp COMMA         &kp DOT           &kp K             &kp RSHFT
-                                    &kp LGUI          &kp LALT          &mo SYM           &kp SPACE         &kp Q             &kp MINUS         &kp ENTER         &mo NAV           &kp RALT          &kp RCTRL
+&rgb_ug RGB_BRD   &kp C             &kp T             &kp I             &kp E             &kp O                                                 &kp B             &kp N             &kp R             &kp S             &kp G             &rgb_ug RGB_BRI
+&mo CAP           &kp F             &kp V             &kp LBKT          &kp SQT           &kp SEMI          &kp C_MUTE        &kp C_PP          &kp Z             &kp Y             &kp COMMA         &kp DOT           &kp K             &mo CAP
+                                    &kp LCTRL         &kp LALT          &mo SYM           &kp Q             &kp SPACE         &kp ENTER         &kp MINUS         &mo NAV          &kp RALT          &kp LSHIFT
             >;
             /* Encoder: Links = Lautstärke, Rechts = Scrollen */
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
-        /* LAYER 1: SYM (Bone/Neo Ebene 3)
-         * Optimiert für Programmierung.
-         * ACHTUNG: Die Codes hier erzeugen die Zeichen auf einem DEUTSCHEN OS.
-         * Beispiel: LS(N8) erzeugt '('
+        /* LAYER 1: BONE CAP (Deutsch)
+      // ------------------------------------------------------------------------------------------------------------
+      // |       |  °  |  §  |  '   |  ??  |  ??  |                   |  $   |  €    |  ¹    |  ²   |   ³   |       |
+      // |       |  J  |  D  |  U   |  A   |  X   |                   |  P   |  H    |  L    |  M   |   W   |       |
+      // |       |  C  |  T  |  I   |  E   |  O   |                   |  B   |  N    |  R    |  S   |   G   |       |
+      // |  CAP  |  F  |  V  |  Ü   |  Ä   |  Ö   |  PREV  |  |  NEXT |  Y   |  Z    |  -    |  "   |   K   |   CAP |
+      //               |     |      | SYM  |  Q   |        |  |       |  ß   | NAV   |       |  GUI |
+         */
+        cap_layer {
+            display-name = "CAP";
+            bindings = <
+&trans            &kp LS(GRAVE)     &kp LS(N3)        &kp LS(BSLH)      &trans            &trans                                                &kp LS(N4)        &kp RA(E)         &kp RA(N1)        &kp RA(N2)        &kp RA(N3)        &trans
+&trans            &kp LS(J)         &kp LS(D)         &kp LS(U)         &kp LS(A)         &kp LS(X)                                             &kp LS(P)         &kp LS(H)         &kp LS(L)         &kp LS(M)         &kp LS(W)         &trans
+&trans            &kp LS(C)         &kp LS(T)         &kp LS(I)         &kp LS(E)         &kp LS(O)                                             &kp LS(B)         &kp LS(N)         &kp LS(R)         &kp LS(S)         &kp LS(G)         &trans
+&trans            &kp LS(F)         &kp LS(V)         &kp LS(LBKT)      &kp LS(SQT)       &kp LS(SEMI)      &kp C_PREV        &kp C_NEXT        &kp LS(Z)         &kp LS(Y)         &kp MINUS         &kp LS(N2)        &kp LS(K)         &trans
+                                    &trans            &trans            &trans            &kp LS(Q)         &trans            &trans            &trans            &trans            &trans            &kp GUI
+            >;
+            /* Encoder: Links = Lautstärke, Rechts = Scrollen */
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+
+        /* LAYER 2: SYM (Bone/Neo Ebene 3)
+      // ------------------------------------------------------------------------------------------------------------
+      // |   F1  |  F2 |  F3 |  F4  |  F5  |  F6  |                   |  F7  |  F8   |  F9   |  F10 |  F11  |  F12  |
+      // |       |  €  |  _  |  [   |  ]   |  ^   |                   |  !   |  <    |  >    |  =   |  &    |       |
+      // |       |  \  |  /  |  {   |  }   |  *   |                   |  ?   |  (    |  )    |  -   |  :    |       |
+      // |  CAP  |  #  |  $  |  |   |  ~   |  `   |        |  |       |  +   |  %    |  "    |  '   |  ;    |  CAP  |
+      //               |     |      | SYM  |  @   |        |  |       |  ??  | NAV   |       |      |
          */
         sym_layer {
             display-name = "SYM";
             bindings = <
 &kp F1            &kp F2            &kp F3            &kp F4            &kp F5            &kp F6                                                &kp F7            &kp F8            &kp F9            &kp F10           &kp F11           &kp F12
-&trans            &kp DE_BSLS       &kp LS(N7)        &kp DE_LCBR       &kp DE_RCBR       &kp LS(RBKT)                                          &kp LS(MINUS)     &kp LS(N1)        &kp NUBS          &kp LS(NUBS)      &kp LS(N5)        &trans
-&trans            &kp HASH          &kp DLLR          &kp DE_LBRC       &kp DE_RBRC       &kp GRAVE                                             &kp LS(N6)        &kp DE_AT         &kp LS(N8)        &kp LS(N9)        &kp LS(N0)        &trans
-&trans            &kp RBKT          &kp NUBS          &kp NUBS          &kp DE_PIPE       &trans            &trans            &trans            &kp LS(SLASH)     &kp SLASH         &kp LS(COMMA)     &kp LS(DOT)       &kp DE_EURO       &trans
-                                    &trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans
+&trans            &kp RA(E)         &kp LS(FSLH)      &kp RA(N8)        &kp RA(N9)        &kp GRAVE                                             &kp LS(N1)        &kp NUBS          &kp LS(NUBS)      &kp LS(N0)        &kp LS(N6)        &trans
+&trans            &kp RA(MINUS)     &kp LS(N7)        &kp RA(N7)        &kp RA(N0)        &kp LS(RBKT)                                          &kp LS(MINUS)     &kp LS(N8)        &kp LS(N9)        &kp FSLH          &kp LS(DOT)       &trans
+&trans            &kp BSLH          &kp LS(N4)        &kp RA(NUBS)      &kp RA(RBKT)      &kp LS(EQUAL)     &trans            &trans            &kp RBKT          &kp LS(N5)        &kp LS(N2)        &kp LS(BSLH)      &kp LS(COMMA)     &trans
+                                    &trans            &trans            &trans            &kp RA(Q)         &trans            &trans            &trans            &trans            &trans            &trans
             >;
             /* Encoder: Links = Lautstärke, Rechts = Scrollen */
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
-        /* LAYER 2: NAV (Bone/Neo Ebene 4)
-         * Navigation links, Ziffernblock rechts
+        /* LAYER 3: NAV (Bone/Neo Ebene 4)
+      // ------------------------------------------------------------------------------------------------------------
+      // |       |      |      |       |       |      |                |      |      |       |      |       |       |
+      // |       | PG_UP| BKSPC|   ^   |  DEL  | PG_DW|                |  +   |   7  |   8   |  9   |  -    |       |
+      // |       | POS1 | <-   |   v   |  ->   | ENDE |                |  *   |   4  |   5   |  6   |  ,    |       |
+      // |  CAP  | UNDO | CUT  | COPY  | PASTE | EINFG|      |  |      |  /   |   1  |   2   |  3   |  .    |  CAP  |
+      //                |      |       |  SYM  | ENTF |      |  |      |  0   |  NAV |NUM_LCK|      |
          */
         nav_layer {
             display-name = "NAV";
             bindings = <
 &trans            &trans            &trans            &trans            &trans            &trans                                                &trans            &trans            &trans            &trans            &trans            &trans
-&trans            &kp PG_UP         &kp HOME          &kp UP            &kp END           &trans                                                &kp KP_PLUS       &kp N7            &kp N8            &kp N9            &kp KP_MINUS      &trans
-&trans            &kp PG_DN         &kp LEFT          &kp DOWN          &kp RIGHT         &trans                                                &kp KP_MULTIPLY   &kp N4            &kp N5            &kp N6            &kp KP_COMMA      &trans
-&trans            &kp K_UNDO        &kp K_CUT         &kp K_COPY        &kp K_PASTE       &trans            &trans            &trans            &kp KP_DIVIDE     &kp N1            &kp N2            &kp N3            &kp KP_DOT        &trans
-                                    &trans            &trans            &trans            &trans            &trans            &trans            &kp N0            &trans            &trans            &trans
+&trans            &kp PG_UP         &kp BSPC          &kp UP            &kp DEL           &kp PG_DN                                             &kp KP_PLUS       &kp KP_N7         &kp KP_N8         &kp KP_N9         &kp KP_MINUS      &trans
+&trans            &kp HOME          &kp LEFT          &kp DOWN          &kp RIGHT         &kp END                                               &kp KP_MULTIPLY   &kp KP_N4         &kp KP_N5         &kp KP_N6         &kp KP_COMMA      &trans
+&trans            &kp K_UNDO        &kp K_CUT         &kp K_COPY        &kp K_PASTE       &kp INS           &trans            &trans            &kp KP_DIVIDE     &kp KP_N1         &kp KP_N2         &kp KP_N3         &kp KP_DOT        &trans
+                                    &trans            &trans            &trans            &kp DEL           &trans            &trans            &kp KP_N0         &trans            &kp KP_NLCK       &trans
             >;
             /* Encoder: Links = Lautstärke, Rechts = Scrollen */
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
-        /* LAYER 3: FUN (Bluetooth & F-Keys) */
+        /* LAYER 4: FUN (Bluetooth & F-Keys)
+      // ----------------------------------------------------------------------------------------------------------------------------
+      // | BTCLR  |  BT1    |  BT2    |   BT3   |   BT4   |   BT5   |                  |      |      |       |      |       |       |
+      // | EXTPWR | RGB_HUD | RGB_HUI | RGB_SAD | RGB_SAI | RGB_EFF |                  |      |      |       |      |       |       |
+      // |        | RGB_BRD | RGB_BRI | RGB_TOG |         |         |                  |      |      |       |      |       |       |
+      // |        |         |         |         |         |StudioUnl|         | |      |      |      |       |      |       |       |
+      //                    |         |         |         |         |         | |      |      |      |       |      |
+        */
         fun_layer {
             display-name = "FUN/BT";
             bindings = <
 &bt BT_CLR        &bt BT_SEL 0      &bt BT_SEL 1      &bt BT_SEL 2      &bt BT_SEL 3      &bt BT_SEL 4                                          &trans            &trans            &trans            &trans            &trans            &trans
 &ext_power EP_TOG &rgb_ug RGB_HUD   &rgb_ug RGB_HUI   &rgb_ug RGB_SAD   &rgb_ug RGB_SAI   &rgb_ug RGB_EFF                                       &trans            &trans            &trans            &trans            &trans            &trans
 &trans            &rgb_ug RGB_BRD   &rgb_ug RGB_BRI   &rgb_ug RGB_TOG   &trans            &trans                                                &trans            &trans            &trans            &trans            &trans            &trans
-&trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans
+&trans            &trans            &trans            &trans            &trans            &studio_unlock    &trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans
                                     &trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans
             >;
             /* Encoder: Links = Lautstärke, Rechts = Scrollen */
