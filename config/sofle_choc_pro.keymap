@@ -49,7 +49,7 @@
                                     &kp LCTRL         &kp LALT          &mo SYM           &kp Q             &kp SPACE         &kp ENTER         &kp MINUS         &mo NAV          &kp RALT          &kp LSHIFT
             >;
             /* Encoder: Links = Lautstärke, Rechts = Scrollen */
-            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp UP DOWN>;
         };
 
         /* LAYER 1: BONE CAP (Deutsch)
@@ -70,7 +70,7 @@
                                     &trans            &trans            &trans            &kp LS(Q)         &trans            &trans            &trans            &trans            &trans            &kp GUI
             >;
             /* Encoder: Links = Lautstärke, Rechts = Scrollen */
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp UP DOWN>;
         };
 
         /* LAYER 2: SYM (Bone/Neo Ebene 3)
@@ -91,7 +91,7 @@
                                     &trans            &trans            &trans            &kp RA(Q)         &trans            &trans            &trans            &trans            &trans            &trans
             >;
             /* Encoder: Links = Lautstärke, Rechts = Scrollen */
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp UP DOWN>;
         };
 
         /* LAYER 3: NAV (Bone/Neo Ebene 4)
@@ -112,7 +112,7 @@
                                     &trans            &trans            &trans            &kp DEL           &trans            &trans            &kp KP_N0         &trans            &kp KP_NLCK       &trans
             >;
             /* Encoder: Links = Lautstärke, Rechts = Scrollen */
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp UP DOWN>;
         };
 
         /* LAYER 4: FUN (Bluetooth & F-Keys)
@@ -133,7 +133,7 @@
                                     &trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans            &trans
             >;
             /* Encoder: Links = Lautstärke, Rechts = Scrollen */
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp UP DOWN>;
         };
     };
 };
