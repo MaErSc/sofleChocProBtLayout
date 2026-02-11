@@ -26,7 +26,7 @@
             tap-ms = <0>;
             bindings
                 = <&macro_tap &tog NAV>
-                , <&macro_tap &rgb_ug RGB_COLOR_HSB(255,143,0)>
+                , <&macro_tap &rgb_ug RGB_COLOR_HSB(37,100,86)>
                 ;
         };
 
@@ -37,7 +37,7 @@
             tap-ms = <0>;
             bindings
                 = <&macro_tap &tog NAV>
-                , <&macro_tap &rgb_ug RGB_COLOR_HSB(68, 222, 71)>
+                , <&macro_tap &rgb_ug RGB_COLOR_HSB(123, 68, 66)>
                 ;
         };
     };
